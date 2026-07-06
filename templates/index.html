@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Parking</title>
+    <meta http-equiv="refresh" content="3">
+
+    <style>
+        body { font-family: Arial; text-align: center; }
+        table { margin: auto; border-collapse: collapse; width: 90%; }
+        th, td { padding: 10px; border: 1px solid black; }
+        th { background: green; color: white; }
+    </style>
+</head>
+
+<body>
+
+<h2>🚗 Smart Parking System</h2>
+
+<script>
+    {% if message %}
+        alert("{{ message }}");
+    {% endif %}
+</script>
+
+<table>
+<tr>
+    <th>ID</th>
+    <th>Plate</th>
+    <th>Vehicle</th>
+    <th>Entry</th>
+    <th>Exit</th>
+    <th>Duration</th>
+    <th>Fee</th>
+    <th>Status</th>
+    <th>Image</th>
+</tr>
+
+{% for row in data %}
+<tr>
+    <td>{{ row[0] }}</td>
+    <td>{{ row[1] }}</td>
+    <td>{{ row[2] }}</td>
+    <td>{{ row[3] }}</td>
+    <td>{{ row[4] or '-' }}</td>
+    <td>{{ row[5] or '-' }}</td>
+    <td>{{ row[6] or '-' }}</td>
+    <td>{{ row[7] }}</td>
+    <td>
+        {% if row[8] %}
+            <img src="{{ url_for('static', filename=row[8]) }}" width="100">
+        {% else %}
+            -
+        {% endif %}
+    </td>
+</tr>
+{% endfor %}
+
+</table>
+
+</body>
+</html>
